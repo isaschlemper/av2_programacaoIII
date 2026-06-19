@@ -198,63 +198,108 @@
 
     <!-- LIVROS -->
     <section id="page-livros" class="page">
-      <div class="page-header">
-        <h1 class="page-title">📖 Livros</h1>
-        <button class="btn btn-primary" onclick="abrirModal('modal-livro')">+ Novo Livro</button>
+
+      <!-- Page Header -->
+      <div class="dash-page-header" style="padding-bottom: 32px;">
+        <div class="dash-heading-wrap">
+          <h1 class="dash-title">Acervo de Livros</h1>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+        <div class="dash-terminal">
+          <p>&gt;&gt; livros disponíveis no momento. comando: clique em "novo livro" para cadastrar ou escolha um card para editar.</p>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
       </div>
 
-      <div class="filtros">
-        <input type="text" id="filtro-titulo" placeholder="Buscar por título..." class="input" />
-        <input type="text" id="filtro-autor" placeholder="Buscar por autor..." class="input" />
-        <select id="filtro-categoria" class="input">
-          <option value="">Todas as categorias</option>
-        </select>
-        <label class="checkbox-label">
-          <input type="checkbox" id="filtro-disponivel" onchange="carregarLivros()" />
-          Apenas disponíveis
+      <!-- Filtros -->
+      <div class="livros-filtros">
+        <div class="livros-input-wrap">
+          <input type="text" id="filtro-titulo" placeholder="Buscar por título..." class="livros-filter-input" onkeyup="carregarLivros()" />
+          <svg class="livros-filter-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6.5" cy="6.5" r="4" stroke="#4f4448" stroke-width="1.5"/><line x1="9.85" y1="9.85" x2="14" y2="14" stroke="#4f4448" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="livros-input-wrap">
+          <input type="text" id="filtro-autor" placeholder="Buscar por autor..." class="livros-filter-input" onkeyup="carregarLivros()" />
+          <svg class="livros-filter-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6.5" cy="6.5" r="4" stroke="#4f4448" stroke-width="1.5"/><line x1="9.85" y1="9.85" x2="14" y2="14" stroke="#4f4448" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="livros-input-wrap livros-select-wrap">
+          <select id="filtro-categoria" class="livros-filter-input livros-filter-select" onchange="carregarLivros()">
+            <option value="">Todas as categorias</option>
+          </select>
+          <svg class="livros-filter-icon" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 9L15 1" stroke="#4f4448" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <label class="livros-check-label">
+          <span class="livros-check-box" id="livros-check-visual"></span>
+          <input type="checkbox" id="filtro-disponivel" style="position:absolute;opacity:0;width:0;height:0" onchange="document.getElementById('livros-check-visual').classList.toggle('checked', this.checked); carregarLivros()" />
+          <span class="livros-check-text">Apenas disponíveis</span>
         </label>
-        <button class="btn btn-secondary" onclick="carregarLivros()">🔍 Filtrar</button>
+        <button class="livros-btn-novo" onclick="abrirModal('modal-livro')">+ Novo Livro</button>
       </div>
 
-      <div class="table-container">
-        <table class="table" id="tabela-livros">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Título</th>
-              <th>Autor</th>
-              <th>Categoria</th>
-              <th>Ano</th>
-              <th>Disponível</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-livros"></tbody>
-        </table>
+      <!-- Grid de Livros -->
+      <div class="livros-grid" id="grid-livros">
+        <div class="livros-empty">Carregando...</div>
       </div>
+
     </section>
 
     <!-- CATEGORIAS -->
+  
     <section id="page-categorias" class="page">
-      <div class="page-header">
-        <h1 class="page-title">🗂️ Categorias</h1>
-        <button class="btn btn-primary" onclick="abrirModal('modal-categoria')">+ Nova Categoria</button>
+
+      <!-- Page Header -->
+      <div class="dash-page-header" style="padding-bottom: 32px;">
+        <div class="dash-heading-wrap">
+          <h1 class="dash-title">Categorias</h1>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+        <div class="dash-terminal">
+          <p>>> organizando as gavetas do servidor. aqui você gerencia as categorias e gêneros do acervo. clique em "nova categoria" para rotular novas histórias ou edite as tags existentes.</p>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
       </div>
-      <div class="cards-grid" id="grid-categorias"></div>
+
+      <div class="livros-filtros page-actions-left">
+        <button class="livros-btn-novo" onclick="abrirModal_categoria_limpo()">+ Nova Categoria</button>
+      </div>
+      <div class="dark-cards-grid" id="grid-categorias"></div>
     </section>
 
     <!-- USUARIOS -->
-    <section id="page-usuarios" class="page">
-      <div class="page-header">
-        <h1 class="page-title">👥 Usuários</h1>
-        <button class="btn btn-primary" onclick="abrirModal('modal-usuario')">+ Novo Usuário</button>
+        <section id="page-usuarios" class="page">
+
+      <!-- Page Header -->
+      <div class="dash-page-header" style="padding-bottom: 32px;">
+        <div class="dash-heading-wrap">
+          <h1 class="dash-title">Usuários</h1>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+        <div class="dash-terminal">
+          <p>>> mapeando usuários ativos... aqui ficam os perfis de quem faz o coração do servidor bater mais forte através da leitura. adicione novos leitores ou altere registros.</p>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
       </div>
-      <div class="filtros">
-        <input type="text" id="filtro-usuario-nome" placeholder="Buscar por nome..." class="input" />
-        <button class="btn btn-secondary" onclick="carregarUsuarios()">🔍 Filtrar</button>
+
+      <div class="livros-filtros page-actions-left">
+        <div class="livros-input-wrap">
+          <input type="text" id="filtro-usuario-nome" placeholder="Buscar por nome..." class="livros-filter-input" onkeyup="carregarUsuarios()" />
+          <svg class="livros-filter-icon" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="#4f4448" stroke-width="1.5"/><line x1="9.85" y1="9.85" x2="14" y2="14" stroke="#4f4448" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <button class="livros-btn-novo" onclick="abrirModal('modal-usuario')">+ Novo Usuário</button>
       </div>
-      <div class="table-container">
-        <table class="table">
+      <div class="dark-table-container">
+        <table class="dark-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -271,21 +316,38 @@
     </section>
 
     <!-- EMPRESTIMOS -->
-    <section id="page-emprestimos" class="page">
-      <div class="page-header">
-        <h1 class="page-title">📋 Empréstimos</h1>
-        <button class="btn btn-primary" onclick="abrirModal('modal-emprestimo')">+ Novo Empréstimo</button>
+      <section id="page-emprestimos" class="page">
+
+      <!-- Page Header -->
+      <div class="dash-page-header" style="padding-bottom: 32px;">
+        <div class="dash-heading-wrap">
+          <h1 class="dash-title">Empréstimos</h1>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+        <div class="dash-terminal">
+          <p>>> cuidando das histórias que viajam de tela em tela. acompanhe quem está com os livros, registre novas saídas ou dê baixa nas devoluções.</p>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
       </div>
-      <div class="filtros">
-        <select id="filtro-status" class="input" onchange="carregarEmprestimos()">
-          <option value="">Todos os status</option>
-          <option value="ativo">Ativo</option>
-          <option value="devolvido">Devolvido</option>
-          <option value="atrasado">Atrasado</option>
-        </select>
+
+      <div class="livros-filtros page-actions-left">
+        <div class="livros-input-wrap livros-select-wrap">
+          <select id="filtro-status" class="livros-filter-input livros-filter-select" onchange="carregarEmprestimos()">
+            <option value="">Todos os status</option>
+            <option value="ativo">Ativo</option>
+            <option value="devolvido">Devolvido</option>
+            <option value="atrasado">Atrasado</option>
+          </select>
+          <svg class="livros-filter-icon" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 9L15 1" stroke="#4f4448" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <button class="livros-btn-novo" onclick="abrirModalEmprestimo()">+ Novo Empréstimo</button>
       </div>
-      <div class="table-container">
-        <table class="table">
+      <div class="dark-table-container">
+        <table class="dark-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -303,43 +365,61 @@
     </section>
 
     <!-- RPA -->
-    <section id="page-rpa" class="page">
-      <h1 class="page-title">🤖 Automação RPA</h1>
+
+
+        <section id="page-rpa" class="page">
+
+      <!-- Page Header -->
+      <div class="dash-page-header" style="padding-bottom: 32px;">
+        <div class="dash-heading-wrap">
+          <h1 class="dash-title">Automação RPA</h1>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+        <div class="dash-terminal">
+          <p>>> executando rotinas de mensageria em segundo plano. nossos robôs estão cuidando dos avisos de whatsapp e e-mail para que as histórias voltem em segurança para o acervo. gerencie os robôs responsáveis por confirmar empréstimos, enviar informativos e dar aquele puxão de orelha amigável em quem está com livro atrasado.</p>
+        </div>
+        <div class="dash-divider">
+          <span>====================================================================================================</span>
+        </div>
+      </div>
+
       <div class="rpa-grid">
-        <div class="card rpa-card">
-          <h2>📧 Notificação por E-mail</h2>
-          <p>Envia e-mail de confirmação de empréstimo para o usuário.</p>
-          <div class="form-group">
-            <label>ID do Empréstimo</label>
-            <input type="number" id="rpa-email-id" class="input" placeholder="Ex: 1" />
+        <div class="dark-rpa-card">
+          <h2 class="dark-rpa-title">Notificação por E-mail</h2>
+          <p class="dark-rpa-desc">Envia e-mail de confirmação de empréstimo para o usuário.</p>
+          <div class="dark-form-group">
+            <label class="dark-label">ID do Empréstimo</label>
+            <input type="number" id="rpa-email-id" class="dark-input" placeholder="Ex: 1" />
           </div>
-          <div class="form-group">
-            <label>E-mail (opcional — usa o do usuário se vazio)</label>
-            <input type="email" id="rpa-email-dest" class="input" placeholder="destino@email.com" />
+          <div class="dark-form-group">
+            <label class="dark-label">E-mail (opcional — usa o do usuário se vazio)</label>
+            <input type="email" id="rpa-email-dest" class="dark-input" placeholder="destino@email.com" />
           </div>
-          <button class="btn btn-primary" onclick="enviarEmail()">📤 Enviar E-mail</button>
+          <button class="btn-rpa" onclick="enviarEmail()">Enviar E-mail</button>
           <div id="rpa-email-resultado" class="resultado"></div>
         </div>
 
-        <div class="card rpa-card">
-          <h2>📱 Notificação por WhatsApp</h2>
-          <p>Envia mensagem via WhatsApp Web para o usuário do empréstimo.</p>
-          <div class="form-group">
-            <label>ID do Empréstimo</label>
-            <input type="number" id="rpa-wpp-id" class="input" placeholder="Ex: 1" />
+        <div class="dark-rpa-card">
+          <h2 class="dark-rpa-title">Notificação por WhatsApp</h2>
+          <p class="dark-rpa-desc">Envia mensagem via WhatsApp Web para o usuário do empréstimo.</p>
+          <div class="dark-form-group">
+            <label class="dark-label">ID do Empréstimo</label>
+            <input type="number" id="rpa-wpp-id" class="dark-input" placeholder="Ex: 1" />
           </div>
-          <div class="form-group">
-            <label>Telefone (com DDD e DDI, sem +)</label>
-            <input type="text" id="rpa-wpp-tel" class="input" placeholder="5511999990001" />
+          <div class="dark-form-group">
+            <label class="dark-label">Telefone (com DDD e DDI, sem +)</label>
+            <input type="text" id="rpa-wpp-tel" class="dark-input" placeholder="5511999990001" />
           </div>
-          <button class="btn btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar WhatsApp</button>
+          <button class="btn-rpa btn-rpa-wpp" onclick="enviarWhatsApp()">Enviar WhatsApp</button>
           <div id="rpa-wpp-resultado" class="resultado"></div>
         </div>
 
-        <div class="card rpa-card" style="grid-column: 1 / -1;">
-          <h2>📄 Log de Automações</h2>
+        <div class="dark-rpa-card" style="grid-column: 1 / -1;">
+          <h2 class="dark-rpa-title">Log de Automações</h2>
           <pre id="rpa-log" class="log-box">Carregando log...</pre>
-          <button class="btn btn-secondary" onclick="carregarLog()">🔄 Atualizar Log</button>
+          <button class="btn-rpa" onclick="carregarLog()">Atualizar Log</button>
         </div>
       </div>
     </section>
@@ -356,7 +436,7 @@
   <!-- ─── MODAIS ─────────────────────────────────────────────────────────── -->
 
   <!-- Modal Livro -->
-  <div id="modal-livro" class="modal-overlay" onclick="fecharModalOverlay(event, 'modal-livro')">
+  <div id="modal-livro" class="modal-overlay hidden" onclick="fecharModalOverlay(event, 'modal-livro')">
     <div class="modal">
       <div class="modal-header">
         <h2 id="modal-livro-titulo">Novo Livro</h2>
@@ -388,7 +468,7 @@
   </div>
 
   <!-- Modal Categoria -->
-  <div id="modal-categoria" class="modal-overlay" onclick="fecharModalOverlay(event, 'modal-categoria')">
+  <div id="modal-categoria" class="modal-overlay hidden" onclick="fecharModalOverlay(event, 'modal-categoria')">
     <div class="modal">
       <div class="modal-header">
         <h2 id="modal-categoria-titulo">Nova Categoria</h2>
@@ -409,7 +489,7 @@
   </div>
 
   <!-- Modal Usuário -->
-  <div id="modal-usuario" class="modal-overlay" onclick="fecharModalOverlay(event, 'modal-usuario')">
+  <div id="modal-usuario" class="modal-overlay hidden" onclick="fecharModalOverlay(event, 'modal-usuario')">
     <div class="modal">
       <div class="modal-header">
         <h2 id="modal-usuario-titulo">Novo Usuário</h2>
@@ -432,7 +512,7 @@
   </div>
 
   <!-- Modal Empréstimo -->
-  <div id="modal-emprestimo" class="modal-overlay" onclick="fecharModalOverlay(event, 'modal-emprestimo')">
+  <div id="modal-emprestimo" class="modal-overlay hidden" onclick="fecharModalOverlay(event, 'modal-emprestimo')">
     <div class="modal">
       <div class="modal-header">
         <h2>Novo Empréstimo</h2>

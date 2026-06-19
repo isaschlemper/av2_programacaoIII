@@ -374,10 +374,12 @@ def notificar_email():
 @app.route('/api/rpa/log', methods=['GET'])
 def rpa_log():
     try:
-        with open('rpa/rpa_log.txt', 'r', encoding='utf-8') as f:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        log_path = os.path.join(base_dir, 'rpa', 'rpa_log.txt')
+        with open(log_path, 'r', encoding='utf-8', errors='replace') as f:
             conteudo = f.read()
-        return conteudo, 200, {'Content-Type': 'text/plain; charset=utf-8'}
-    except FileNotFoundError:
+        return (conteudo or 'Log ainda vazio — nenhuma automação executada.'), 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    except (FileNotFoundError, OSError):
         return 'Log ainda vazio — nenhuma automação executada.', 200, {'Content-Type': 'text/plain'}
 
 
